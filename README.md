@@ -11,6 +11,7 @@ Nama Pendamping : Muhammad Ghazy
 Tim Juri :
 1. dimasukkan setelah pengajuan proposal project
 2. dan digunakan saat pengajuan seminar aplikasi
+
 Executive Summary : 
 Latar Belakang:
   Aplikasi ini dibuat berdasarkan fenomena yang terjadi dimasa saat ini 
