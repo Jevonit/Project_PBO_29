@@ -11,7 +11,7 @@ public class App extends Application{
     @Override
     public void start(Stage PrimaryStage){
         PrimaryStage.setTitle("Eco-Resolver");
-        PrimaryStage.setResizable(false);
+        // PrimaryStage.setResizable(false);
         Image icon = new Image(getClass().getResourceAsStream("/images/Logo.png"));
         PrimaryStage.getIcons().add(icon);
 

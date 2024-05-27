@@ -12,7 +12,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import project_pbo_29.DButils;
+
+import project_pbo_29.Utils.DB_Utils;
 
 public class LoginScene {
     private Stage stage;
@@ -22,7 +23,7 @@ public class LoginScene {
     }
 
     public void showLoginScene(){
-        DButils DButils = new DButils(stage);
+        DB_Utils DButils = new DB_Utils(stage);
         BorderPane SceneLogin = new BorderPane();
 
         // Kiri

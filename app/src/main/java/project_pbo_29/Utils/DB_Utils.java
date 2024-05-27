@@ -1,4 +1,4 @@
-package project_pbo_29;
+package project_pbo_29.Utils;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -7,10 +7,10 @@ import javafx.stage.Stage;
 import java.sql.*;
 import project_pbo_29.Scenes.ChatScene;
 
-public class DButils{
+public class DB_Utils{
     private Stage stage;
     
-    public DButils(Stage stage){
+    public DB_Utils(Stage stage){
         this.stage = stage;
     }  
 
@@ -46,6 +46,7 @@ public class DButils{
                 alert.setContentText("Account Created Successfully!");
                 alert.show();
                 ChatScene chatScene = new ChatScene(stage,username,password);
+                ScreenSizeUtils.saveScreenSize(stage);
                 chatScene.showChatScene();
             }
 
@@ -113,6 +114,7 @@ public class DButils{
                         alert.setContentText("Login Successful!");
                         alert.show();
                         ChatScene chatScene = new ChatScene(stage,username,password);
+                        ScreenSizeUtils.saveScreenSize(stage);
                         chatScene.showChatScene();
                     } else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);

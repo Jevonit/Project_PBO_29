@@ -11,29 +11,39 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.util.List;
 import java.util.Random;
+
+import project_pbo_29.Data.*;
+import project_pbo_29.Utils.ScreenSizeUtils;
 
 public class ChatScene {
     private Stage stage;
     private String username;
     private String password;
-    private boolean isWaitingForResponse = false; // flag to check if the user is waiting for a response
+    private VBox chatArea;
+    private VBox inputArea;
+    private ScrollPane chatScrollPane;
+    private String currentQuestion;
+    private boolean tungguRespon = false;
 
     public ChatScene(Stage stage, String username, String password) {
         this.stage = stage;
         this.username = username;
         this.password = password;
+        this.currentQuestion = "root";
     }
 
     public ChatScene(Stage stage) {
         this.stage = stage;
+        this.currentQuestion = "root";
     }
 
     public void showChatScene() {
         BorderPane SceneChat = new BorderPane();
         SceneChat.setId("SceneChat");
 
-        // nama logo, icon logo, dan button logout
+        // logo, title, settings button, and logout button
         HBox topBar = new HBox();
         topBar.setId("topBar");
         topBar.setPadding(new Insets(10, 20, 10, 20));
@@ -61,65 +71,65 @@ public class ChatScene {
         topBar.getChildren().addAll(titleLabel, spacer, settingsButton, logoutButton);
         SceneChat.setTop(topBar);
 
-        // chat area
-        VBox chatArea = new VBox();
+        // Chat area
+        chatArea = new VBox();
         chatArea.setId("chatArea");
         chatArea.setPadding(new Insets(10, 20, 10, 20));
         chatArea.setSpacing(10);
 
-        ScrollPane chatScrollPane = new ScrollPane(chatArea);
+        chatScrollPane = new ScrollPane(chatArea);
         chatScrollPane.setFitToWidth(true);
         SceneChat.setCenter(chatScrollPane);
 
-        // input area
-        VBox inputArea = new VBox();
+        // Input area
+        inputArea = new VBox();
         inputArea.setId("inputArea");
         inputArea.setPadding(new Insets(10, 20, 10, 20));
         inputArea.setSpacing(10);
+        inputArea.setAlignment(Pos.CENTER);
 
-        Button question1Button = new Button("Halo, saya ingin bertanya tentang pengertian reduce, reuse, dan recyle");
-        question1Button.setId("questionButton");
-        question1Button.setOnAction(event -> askQuestion(chatArea, "Halo, saya ingin bertanya tentang pengertian reduce, reuse, dan recyle", "1. Reduce\r\n" + 
-                        "reduce atau mengurangi adalah konsep untuk mengurangi penggunaan bahan yang tidak perlu dan mengurangi jumlah sampah yang dihasilkan. Hal ini dapat dilakukan dengan cara mengurangi konsumsi sumber daya alam dan mengurangi produksi limbah.\r\n" + 
-                        "\r\n" + 
-                        "Beberapa contoh pengurangan penggunaan bahan yang tidak perlu adalah dengan membeli produk dengan kemasan yang ramah lingkungan, menggunakan kantong belanjaan yang dapat digunakan kembali, atau memilih produk yang memiliki masa pakai yang lebih lama.\r\n" + 
-                        "\r\n" + 
-                        "Manfaat dari konsep reduce adalah dapat mengurangi penggunaan sumber daya alam dan mengurangi jumlah sampah yang dihasilkan. Dengan cara ini, akan mengurangi dampak negatif terhadap lingkungan.\r\n" + 
-                        "\r\n" + 
-                        "2. Reuse\r\n" + 
-                        " reuse atau menggunakan kembali adalah konsep untuk menggunakan kembali bahan yang masih bisa digunakan dan meminimalisir jumlah sampah. Hal ini dilakukan dengan cara memanfaatkan kembali produk yang sudah tidak digunakan.\r\n" + 
-                        "\r\n" + 
-                        "Contohnya dengan memanfaatkan kantong belanjaan yang sudah tidak digunakan lagi sebagai tempat sampah atau membuat tas belanjaan dari bahan-bahan bekas lain seperti baju atau celana yang tidak dipakai lagi.\r\n" + 
-                        "\r\n" + 
-                        "Manfaat dari konsep ini, Anda dapat mengurangi jumlah sampah yang dihasilkan dan mengurangi penggunaan sumber daya alam yang baru. Penerapan konsep reuse dapat meminimalisasi dampak buruk terhadap lingkungan hidup.\r\n" + 
-                        "\r\n" + 
-                        "3. Recycle\r\n" + 
-                        " recycle atau mendaur ulang adalah konsep untuk mengolah kembali sampah menjadi bahan yang bisa digunakan kembali. Anda bisa melakukannya dengan cara memilah sampah dan mengolahnya menjadi bahan baku yang bisa digunakan kembali.\r\n" + 
-                        "\r\n" + 
-                        "Beberapa contoh dari konsep ini adalah dengan mengolah sampah kertas menjadi kertas daur ulang atau mengolah botol plastik menjadi serat yang bisa digunakan untuk membuat produk lain seperti baju atau tas.\r\n" + 
-                        "\r\n" + 
-                        "Manfaat dari konsep recycle juga sama, yaitu mengurangi jumlah sampah yang ada dan mengurangi penggunaan sumber daya alam yang baru. Melalui cara ini, diharapkan dapat mengurangi dampak negatif terhadap lingkungan dan meningkatkan efisiensi penggunaan sumber daya alam.\r\n" + 
-                        "\r\n" + 
-                        "Dengan menerapkan konsep Reduce Reuse Recycle, selain jumlah dan dampak sampah terhadap lingkungan dapat dikurangi, masyarakat luas juga bisa meningkatkan rasa kepedulian dan kesadaran pada lingkungan."));
-
-        Button question2Button = new Button("Question 2");
-        question2Button.setId("questionButton");
-        question2Button.setOnAction(event -> askQuestion(chatArea, "Question 2?", "Answer 2"));
-
-        inputArea.getChildren().addAll(question1Button, question2Button);
-        SceneChat.setBottom(inputArea);
+        ScrollPane inputScrollPane = new ScrollPane(inputArea);
+        inputScrollPane.setFitToWidth(true);
+        inputScrollPane.setPrefHeight(210);
+        SceneChat.setBottom(inputScrollPane);
+        updateQuestions();
 
         Scene chatScene = new Scene(SceneChat, 1000, 600);
         chatScene.getStylesheets().add(getClass().getResource("/style/styleChatScene.css").toExternalForm());
         stage.setScene(chatScene);
+        ScreenSizeUtils.restoreScreenSize(stage);
         stage.show();
     }
 
-    private void askQuestion(VBox chatArea, String question, String answer) {
-        if (!isWaitingForResponse) {
-            isWaitingForResponse = true;
-            addChatMessage(chatArea, question, true);
-            animasiBerpikir(chatArea, answer);
+    private void updateQuestions() {
+        inputArea.getChildren().clear();
+        List<QuestionAnswer> currentQuestions = QuestionAndAnswerData.getQuestions(currentQuestion);
+
+        for (int i = 0; i < currentQuestions.size(); i++) {
+            QuestionAnswer qa = currentQuestions.get(i);
+            Button questionButton = new Button(qa.getQuestion());
+            questionButton.setId("questionButton");
+            questionButton.setOnAction(event -> askQuestion(qa));
+
+            // Tambahkan angka di ujung kiri
+            Label numberLabel = new Label((i + 1) + ". ");
+            HBox buttonContainer = new HBox(numberLabel, questionButton);
+            buttonContainer.setAlignment(Pos.CENTER_LEFT);
+            inputArea.getChildren().add(buttonContainer);
+
+            if (i < currentQuestions.size() - 1) {
+                Separator separator = new Separator();
+                inputArea.getChildren().add(separator);
+            }
+        }
+    }
+
+    private void askQuestion(QuestionAnswer qa) {
+        if (!tungguRespon) {
+            tungguRespon = true;
+            addChatMessage(chatArea, qa.getQuestion(), true);
+            animasiBerpikir(chatArea, qa.getAnswer());
+            currentQuestion = qa.getNext();
         }
     }
 
@@ -134,6 +144,8 @@ public class ChatScene {
 
         messageBox.getChildren().add(messageLabel);
         chatArea.getChildren().add(messageBox);
+
+        Platform.runLater(() -> chatScrollPane.setVvalue(0.5));
     }
 
     private void animasiBerpikir(VBox chatArea, String answer) {
@@ -147,6 +159,8 @@ public class ChatScene {
         thinkingBox.getChildren().add(thinkingLabel);
         chatArea.getChildren().add(thinkingBox);
 
+        Platform.runLater(() -> chatScrollPane.setVvalue(0.5));
+
         int delay = new Random().nextInt(3) + 1;
 
         new Thread(() -> {
@@ -158,7 +172,8 @@ public class ChatScene {
             Platform.runLater(() -> {
                 chatArea.getChildren().remove(thinkingBox);
                 addChatMessage(chatArea, answer, false);
-                isWaitingForResponse = false;
+                tungguRespon = false;
+                updateQuestions();
             });
         }).start();
     }
@@ -168,7 +183,8 @@ public class ChatScene {
         settingsAlert.setTitle("Settings");
         settingsAlert.setHeaderText("Profile Information");
         settingsAlert.setContentText("Username: " + username + "\nPassword: " + password);
-        settingsAlert.showAndWait();
+        settingsAlert.getDialogPane().getStylesheets().add(getClass().getResource("/style/styleAlert.css").toExternalForm());
+        settingsAlert.show();
     }
 
     private void Logout(){
