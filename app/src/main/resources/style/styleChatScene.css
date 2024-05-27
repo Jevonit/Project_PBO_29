@@ -1,0 +1,62 @@
+#SceneChat {
+    -fx-background-color: #e0ffe0; /* Warna hijau muda */
+}
+
+#topBar {
+    -fx-background-color: #2E7D32; /* Warna hijau tua */
+}
+
+#titleLabel {
+    -fx-text-fill: #ffffff; /* Warna teks putih */
+    -fx-font-size: 35px;
+}
+
+#logoutButton {
+    -fx-background-color: #009900; /* Warna hijau tua */
+    -fx-text-fill: #ffffff; /* Warna teks putih */
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+#settingsButton {
+    -fx-background-color: #2E7D32; /* Warna hijau tua */
+    -fx-text-fill: #ffffff; /* Warna teks putih */
+}
+
+#chatArea {
+    -fx-background-color: #e0ffe0; /* Warna hijau muda */
+}
+
+#inputArea {
+    -fx-background-color: #2E7D32; /* Warna hijau tua */
+}
+
+#userMessage {
+    -fx-background-color: #66ff66; /* Warna hijau sedang */
+    -fx-text-fill: #000000; /* Warna teks hitam */
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+#botMessage {
+    -fx-background-color: #99ff99; /* Warna hijau lebih terang */
+    -fx-text-fill: #000000; /* Warna teks hitam */
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+#thinkingMessage {
+    -fx-text-fill: #2E7D32; /* Warna hijau tua */
+    -fx-font-size: 35px;
+}
+
+#questionButton {
+    -fx-background-color: #2E7D32; /* Warna hijau tua */
+    -fx-text-fill: #ffffff; /* Warna teks putih */
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
