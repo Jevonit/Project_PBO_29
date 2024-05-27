@@ -1,0 +1,27 @@
+plugins {
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+    implementation 'com.google.guava:guava:31.1-jre'
+    implementation 'org.xerial:sqlite-jdbc:3.36.0.3'
+}
+
+application {
+    mainClass = 'project_pbo_29.App'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+javafx {
+    version = "22.0.1"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}

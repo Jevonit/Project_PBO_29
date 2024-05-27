@@ -1,0 +1,25 @@
+{    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "SQLite",
+            "request": "launch",
+            "mainClass": "project_pbo_29.config.SQLite",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "project_pbo_29.App",
+            "projectName": "app",
+            "vmArgs": "--module-path \"C:/JavaFX/lib\" --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+}
