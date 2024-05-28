@@ -17,7 +17,7 @@ import java.util.Random;
 import project_pbo_29.Data.*;
 import project_pbo_29.Utils.ScreenSizeUtils;
 
-public class ChatScene {
+public class ChatScene{
     private Stage stage;
     private String username;
     private String password;
@@ -62,7 +62,7 @@ public class ChatScene {
         settingsIconView.setFitWidth(50);
         Button settingsButton = new Button("", settingsIconView);
         settingsButton.setId("settingsButton");
-        settingsButton.setOnAction(event -> settingMenu());
+        settingsButton.setOnAction(event -> accountView());
 
         Button logoutButton = new Button("Logout");
         logoutButton.setId("logoutButton");
@@ -101,39 +101,7 @@ public class ChatScene {
         stage.show();
     }
 
-    private void updateQuestions() {
-        inputArea.getChildren().clear();
-        List<QuestionAnswer> currentQuestions = QuestionAndAnswerData.getQuestions(currentQuestion);
-
-        for (int i = 0; i < currentQuestions.size(); i++) {
-            QuestionAnswer qa = currentQuestions.get(i);
-            Button questionButton = new Button(qa.getQuestion());
-            questionButton.setId("questionButton");
-            questionButton.setOnAction(event -> askQuestion(qa));
-
-            // Tambahkan angka di ujung kiri
-            Label numberLabel = new Label((i + 1) + ". ");
-            HBox buttonContainer = new HBox(numberLabel, questionButton);
-            buttonContainer.setAlignment(Pos.CENTER_LEFT);
-            inputArea.getChildren().add(buttonContainer);
-
-            if (i < currentQuestions.size() - 1) {
-                Separator separator = new Separator();
-                inputArea.getChildren().add(separator);
-            }
-        }
-    }
-
-    private void askQuestion(QuestionAnswer qa) {
-        if (!tungguRespon) {
-            tungguRespon = true;
-            addChatMessage(chatArea, qa.getQuestion(), true);
-            animasiBerpikir(chatArea, qa.getAnswer());
-            currentQuestion = qa.getNext();
-        }
-    }
-
-    private void addChatMessage(VBox chatArea, String message, boolean isUser) {
+    private void addMessage(VBox chatArea, String message, boolean isUser) {
         HBox messageBox = new HBox();
         messageBox.setPadding(new Insets(5, 10, 5, 10));
         messageBox.setAlignment(isUser ? Pos.CENTER_RIGHT : Pos.CENTER_LEFT);
@@ -145,7 +113,38 @@ public class ChatScene {
         messageBox.getChildren().add(messageLabel);
         chatArea.getChildren().add(messageBox);
 
-        Platform.runLater(() -> chatScrollPane.setVvalue(0.5));
+        Platform.runLater(() -> chatScrollPane.setVvalue(10));
+    }
+
+    private void askQuestion(QuestionAnswer qa) {
+        if (!tungguRespon) {
+            tungguRespon = true;
+            addMessage(chatArea, qa.getQuestion(), true);
+            animasiBerpikir(chatArea, qa.getAnswer());
+            currentQuestion = qa.getNext();
+        }
+    }
+
+    private void updateQuestions() {
+        inputArea.getChildren().clear();
+        List<QuestionAnswer> currentQuestions = QuestionAndAnswerData.getQuestions(currentQuestion);
+
+        for (int i = 0; i < currentQuestions.size(); i++) {
+            QuestionAnswer qa = currentQuestions.get(i);
+            Button questionButton = new Button(qa.getQuestion());
+            questionButton.setId("questionButton");
+            questionButton.setOnAction(event -> askQuestion(qa));
+
+            Label numberLabel = new Label((i + 1) + ". ");
+            HBox buttonContainer = new HBox(numberLabel, questionButton);
+            buttonContainer.setAlignment(Pos.CENTER_LEFT);
+            inputArea.getChildren().add(buttonContainer);
+
+            if (i < currentQuestions.size() - 1) {
+                Separator separator = new Separator();
+                inputArea.getChildren().add(separator);
+            }
+        }
     }
 
     private void animasiBerpikir(VBox chatArea, String answer) {
@@ -159,7 +158,7 @@ public class ChatScene {
         thinkingBox.getChildren().add(thinkingLabel);
         chatArea.getChildren().add(thinkingBox);
 
-        Platform.runLater(() -> chatScrollPane.setVvalue(0.5));
+        Platform.runLater(() -> chatScrollPane.setVvalue(10));
 
         int delay = new Random().nextInt(3) + 1;
 
@@ -171,14 +170,14 @@ public class ChatScene {
             }
             Platform.runLater(() -> {
                 chatArea.getChildren().remove(thinkingBox);
-                addChatMessage(chatArea, answer, false);
+                addMessage(chatArea, answer, false);
                 tungguRespon = false;
                 updateQuestions();
             });
         }).start();
     }
 
-    private void settingMenu() {
+    private void accountView() {
         Alert settingsAlert = new Alert(Alert.AlertType.INFORMATION);
         settingsAlert.setTitle("Settings");
         settingsAlert.setHeaderText("Profile Information");
@@ -200,4 +199,5 @@ public class ChatScene {
             }
         });
     }
+    
 }

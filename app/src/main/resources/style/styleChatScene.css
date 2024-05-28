@@ -38,6 +38,7 @@
     -fx-padding: 10px;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
+    -fx-font-size:17px;
 }
 
 #botMessage {
@@ -46,6 +47,7 @@
     -fx-padding: 10px;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
+    -fx-font-size:17px;
 }
 
 #thinkingMessage {
