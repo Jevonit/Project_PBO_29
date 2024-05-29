@@ -1,0 +1,59 @@
+#LoginSceneKiri {
+    -fx-background-color: #2E7D32;
+    -fx-padding: 50px;
+    -fx-alignment: center;
+}
+
+#LoginSceneKanan {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 50px;
+    -fx-alignment: center;
+}
+
+#namaLogo {
+    -fx-text-fill: white;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+}
+
+#deskripsi {
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-text-alignment: center;
+}
+
+#textSignIn {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-padding: 20px 0;
+}
+
+#Username, #password {
+    -fx-prompt-text-fill: #B0BEC5;
+    -fx-font-size: 16px;
+    -fx-padding: 10px;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-color: #B0BEC5;
+    -fx-border-width: 1px;
+    -fx-background-color: #EEEEEE;
+}
+
+#signInButton {
+    -fx-background-color: #00E676;
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 20px;
+}
+
+#dontHaveAccount {
+    -fx-background-color: transparent;
+    -fx-text-fill: #00E676;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 20px;
+    -fx-border-color: #00E676;
+    -fx-border-width: 1px;
+    -fx-border-radius: 20px;
+}
