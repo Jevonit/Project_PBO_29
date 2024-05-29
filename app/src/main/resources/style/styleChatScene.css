@@ -1,5 +1,5 @@
 #SceneChat {
-    -fx-background-color: #a8ffb3;
+    -fx-background-color: #000000;
 }
 
 #topBar {
@@ -30,8 +30,6 @@
 }
 
 #chatArea {
-    -fx-background-color: #e0ffe0;
-    -fx-border-color: #2E7D32;
     -fx-border-width: 0 0 4px 0;
     -fx-padding: 10px;
 }

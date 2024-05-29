@@ -272,7 +272,7 @@ public class QuestionAndAnswerData{
 
 
 
-        // Pertanyaan utama tentang Recycle
+        // Recycle
         questionTree.put("recycle1", Arrays.asList(
                 new QuestionAnswer("Apa manfaat dari recycle?", 
                 "Manfaat dari recycle meliputi:\n1. Mengurangi jumlah sampah yang berakhir di TPA.\n2. Menghemat sumber daya alam dengan menggunakan bahan daur ulang.\n3. Mengurangi polusi yang dihasilkan dari pembuatan produk baru.", 
@@ -344,22 +344,75 @@ public class QuestionAndAnswerData{
 
 
 
-        // Add branches for Replace
+        // Replace
         questionTree.put("replace1", Arrays.asList(
-                new QuestionAnswer("Bagaimana cara melakukan Replace?", "Berikut adalah beberapa cara melakukan Replace: \n1. Menggunakan produk yang lebih ramah lingkungan\n2. Mengganti produk sekali pakai dengan produk yang dapat digunakan kembali\n3. Memilih produk dengan kemasan yang dapat didaur ulang", "replace2"),
-                new QuestionAnswer("Back", "Kembali ke pertanyaan sebelumnya", "root"),
+                new QuestionAnswer("Apa manfaat dari replace?", 
+                "Manfaat dari replace meliputi:\n1. Mengurangi jumlah sampah yang dihasilkan.\n2. Mengurangi penggunaan sumber daya alam yang tidak terbarukan.\n3. Meningkatkan kesadaran akan pentingnya menggunakan produk ramah lingkungan.", 
+                "replace2"),
+                new QuestionAnswer("Apa contoh barang yang bisa diganti dengan yang lebih ramah lingkungan?", 
+                "Contoh barang yang bisa diganti meliputi:\n1. Mengganti kantong plastik dengan tas kain.\n2. Menggunakan botol minum stainless steel daripada botol plastik sekali pakai.\n3. Menggunakan sikat gigi bambu daripada sikat gigi plastik.", 
+                "replace3"),
+                new QuestionAnswer("Bagaimana cara memulai replace dalam kehidupan sehari-hari?", 
+                "Untuk memulai replace dalam kehidupan sehari-hari, Anda bisa:\n1. Melakukan audit barang-barang yang sering digunakan dan mencari alternatif ramah lingkungan.\n2. Membeli barang yang tahan lama dan dapat digunakan berkali-kali.\n3. Mencari informasi dan edukasi tentang produk ramah lingkungan yang tersedia di pasaran.", 
+                "replace4"),
                 new QuestionAnswer("Reset QuestionBox ke awal", "Baik", "root")
         ));
+        // Cabang replace2
         questionTree.put("replace2", Arrays.asList(
-                new QuestionAnswer("Mengapa penting melakukan Replace?", "Replace membantu mengurangi limbah dan dampak negatif terhadap lingkungan dengan memilih alternatif yang lebih ramah lingkungan.", "replace3"),
-                new QuestionAnswer("Back", "Kembali ke pertanyaan sebelumnya", "replace1"),
+                new QuestionAnswer("Bagaimana cara memilih produk ramah lingkungan?", 
+                "Cara memilih produk ramah lingkungan meliputi:\n1. Membaca label dan informasi produk untuk memastikan bahan yang digunakan ramah lingkungan.\n2. Memilih produk dengan kemasan minimal atau yang dapat didaur ulang.\n3. Mendukung merek atau perusahaan yang memiliki komitmen terhadap keberlanjutan.", 
+                "replace5"),
+                new QuestionAnswer("Apa tantangan dalam menerapkan replace?", 
+                "Tantangan dalam menerapkan replace meliputi:\n1. Kurangnya kesadaran dan pengetahuan tentang alternatif ramah lingkungan.\n2. Harga produk ramah lingkungan yang kadang lebih mahal.\n3. Terbatasnya ketersediaan produk ramah lingkungan di pasaran.", 
+                "replace6"),
+                new QuestionAnswer("Back", "Kembali ke pertanyaan sebelumnya.", "replace1"),
                 new QuestionAnswer("Reset QuestionBox ke awal", "Baik", "root")
         ));
+        // Cabang replace3, bercabang ke replace5 dan replace6
         questionTree.put("replace3", Arrays.asList(
-                new QuestionAnswer("Contoh barang yang bisa di-Replace?", "Beberapa contoh barang yang bisa di-Replace termasuk sedotan plastik dengan sedotan bambu, kantong plastik dengan kantong kain, dan botol plastik dengan botol stainless steel.", "replace4"),
-                new QuestionAnswer("Back", "Kembali ke pertanyaan sebelumnya", "replace2"),
+                new QuestionAnswer("Apa saja alternatif ramah lingkungan untuk barang-barang sehari-hari?", 
+                "Alternatif ramah lingkungan untuk barang-barang sehari-hari termasuk:\n1. Menggunakan tisu kain daripada tisu kertas.\n2. Memakai pembalut kain atau menstrual cup daripada pembalut sekali pakai.\n3. Memilih sabun batangan tanpa kemasan plastik daripada sabun cair dalam botol plastik.", 
+                "replace5"),
+                new QuestionAnswer("Bagaimana cara mengedukasi masyarakat tentang pentingnya replace?", 
+                "Cara mengedukasi masyarakat tentang pentingnya replace antara lain:\n1. Mengadakan seminar dan workshop tentang produk ramah lingkungan.\n2. Menyebarkan informasi melalui media sosial dan komunitas.\n3. Menjalin kerjasama dengan toko atau pasar untuk menyediakan lebih banyak produk ramah lingkungan.", 
+                "replace6"),
+                new QuestionAnswer("Back", "Kembali ke pertanyaan sebelumnya.", "replace1"),
                 new QuestionAnswer("Reset QuestionBox ke awal", "Baik", "root")
         ));
+        // Cabang replace4, bercabang ke replace5 dan replace6
+        questionTree.put("replace4", Arrays.asList(
+                new QuestionAnswer("Bagaimana cara mengajak keluarga untuk mendukung replace?", 
+                "Untuk mengajak keluarga mendukung replace, Anda bisa:\n1. Memberikan contoh dengan menggunakan produk ramah lingkungan sendiri.\n2. Mendiskusikan manfaat dari replace dan dampaknya terhadap lingkungan.\n3. Melibatkan anggota keluarga dalam memilih dan membeli produk ramah lingkungan.", 
+                "replace5"),
+                new QuestionAnswer("Apa peran pemerintah dalam mendukung replace?", 
+                "Peran pemerintah dalam mendukung replace meliputi:\n1. Membuat regulasi yang mendorong penggunaan produk ramah lingkungan.\n2. Memberikan insentif kepada produsen yang menghasilkan produk ramah lingkungan.\n3. Mengadakan kampanye nasional untuk meningkatkan kesadaran masyarakat.", 
+                "replace6"),
+                new QuestionAnswer("Back", "Kembali ke pertanyaan sebelumnya.", "replace1"),
+                new QuestionAnswer("Reset QuestionBox ke awal", "Baik", "root")
+        ));
+        // Cabang replace5
+        questionTree.put("replace5", Arrays.asList(
+                new QuestionAnswer("Bagaimana cara memilih produk ramah lingkungan?", 
+                "Cara memilih produk ramah lingkungan meliputi:\n1. Membaca label dan informasi produk untuk memastikan bahan yang digunakan ramah lingkungan.\n2. Memilih produk dengan kemasan minimal atau yang dapat didaur ulang.\n3. Mendukung merek atau perusahaan yang memiliki komitmen terhadap keberlanjutan.", 
+                "replace5"),
+                new QuestionAnswer("Apa tantangan dalam menerapkan replace?", 
+                "Tantangan dalam menerapkan replace meliputi:\n1. Kurangnya kesadaran dan pengetahuan tentang alternatif ramah lingkungan.\n2. Harga produk ramah lingkungan yang kadang lebih mahal.\n3. Terbatasnya ketersediaan produk ramah lingkungan di pasaran.", 
+                "replace5"),
+                new QuestionAnswer("Back", "Kembali ke pertanyaan sebelumnya.", "replace1"),
+                new QuestionAnswer("Reset QuestionBox ke awal", "Baik", "root")
+        ));
+        // Cabang replace6
+        questionTree.put("replace6", Arrays.asList(
+                new QuestionAnswer("Apa saja alternatif ramah lingkungan untuk barang-barang sehari-hari?", 
+                "Alternatif ramah lingkungan untuk barang-barang sehari-hari termasuk:\n1. Menggunakan tisu kain daripada tisu kertas.\n2. Memakai pembalut kain atau menstrual cup daripada pembalut sekali pakai.\n3. Memilih sabun batangan tanpa kemasan plastik daripada sabun cair dalam botol plastik.", 
+                "replace6"),
+                new QuestionAnswer("Bagaimana cara mengedukasi masyarakat tentang pentingnya replace?", 
+                "Cara mengedukasi masyarakat tentang pentingnya replace antara lain:\n1. Mengadakan seminar dan workshop tentang produk ramah lingkungan.\n2. Menyebarkan informasi melalui media sosial dan komunitas.\n3. Menjalin kerjasama dengan toko atau pasar untuk menyediakan lebih banyak produk ramah lingkungan.", 
+                "replace6"),
+                new QuestionAnswer("Back", "Kembali ke pertanyaan sebelumnya.", "replace1"),
+                new QuestionAnswer("Reset QuestionBox ke awal", "Baik", "root")
+        ));
+    
 
 
 
