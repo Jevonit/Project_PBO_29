@@ -272,22 +272,75 @@ public class QuestionAndAnswerData{
 
 
 
-        // Add branches for Recycle
+        // Pertanyaan utama tentang Recycle
         questionTree.put("recycle1", Arrays.asList(
-                new QuestionAnswer("Bagaimana cara melakukan Recycle?", "Berikut adalah beberapa cara melakukan Recycle: \n1. Memisahkan sampah berdasarkan jenisnya\n2. Mengumpulkan sampah yang bisa didaur ulang\n3. Membawa sampah ke tempat daur ulang", "recycle2"),
-                new QuestionAnswer("Back", "Kembali ke pertanyaan sebelumnya", "root"),
+                new QuestionAnswer("Apa manfaat dari recycle?", 
+                "Manfaat dari recycle meliputi:\n1. Mengurangi jumlah sampah yang berakhir di TPA.\n2. Menghemat sumber daya alam dengan menggunakan bahan daur ulang.\n3. Mengurangi polusi yang dihasilkan dari pembuatan produk baru.", 
+                "recycle2"),
+                new QuestionAnswer("Apa saja bahan yang bisa didaur ulang?", 
+                "Bahan yang bisa didaur ulang antara lain:\n1. Kertas dan karton.\n2. Kaca dan plastik.\n3. Logam dan aluminium.\n4. Elektronik dan baterai.", 
+                "recycle3"),
+                new QuestionAnswer("Bagaimana proses daur ulang dilakukan?", 
+                "Proses daur ulang biasanya melibatkan beberapa tahap seperti pengumpulan, penyortiran, pembersihan, dan pengolahan menjadi bahan baru yang bisa digunakan kembali untuk membuat produk baru.", 
+                "recycle4"),
                 new QuestionAnswer("Reset QuestionBox ke awal", "Baik", "root")
         ));
+        // Cabang recycle2
         questionTree.put("recycle2", Arrays.asList(
-                new QuestionAnswer("Mengapa penting melakukan Recycle?", "Recycle membantu mengurangi polusi, menghemat energi, dan mengurangi kebutuhan akan bahan baku baru.", "recycle3"),
-                new QuestionAnswer("Back", "Kembali ke pertanyaan sebelumnya", "recycle1"),
+                new QuestionAnswer("Bagaimana peran individu dalam mendukung recycle?", 
+                "Peran individu dalam mendukung recycle sangat penting. Setiap orang dapat berkontribusi dengan:\n1. Memisahkan sampah rumah tangga sesuai jenisnya.\n2. Menggunakan produk yang terbuat dari bahan daur ulang.\n3. Mengedukasi diri sendiri dan orang lain tentang pentingnya recycle.", 
+                "recycle5"),
+                new QuestionAnswer("Apa tantangan terbesar dalam implementasi recycle?", 
+                "Tantangan terbesar dalam implementasi recycle meliputi:\n1. Kurangnya kesadaran masyarakat tentang pentingnya recycle.\n2. Infrastruktur daur ulang yang belum memadai.\n3. Biaya yang tinggi dalam proses daur ulang.", 
+                "recycle6"),
+                new QuestionAnswer("Back", "Kembali ke pertanyaan sebelumnya.", "recycle1"),
                 new QuestionAnswer("Reset QuestionBox ke awal", "Baik", "root")
         ));
+        // Cabang recycle3, bercabang ke recycle5 dan recycle6
         questionTree.put("recycle3", Arrays.asList(
-                new QuestionAnswer("Contoh barang yang bisa di-Recycle?", "Beberapa contoh barang yang bisa di-Recycle termasuk kertas, plastik, kaca, dan logam.", "recycle4"),
-                new QuestionAnswer("Back", "Kembali ke pertanyaan sebelumnya", "recycle2"),
+                new QuestionAnswer("Apa saja produk yang bisa dihasilkan dari daur ulang?", 
+                "Produk yang bisa dihasilkan dari daur ulang meliputi:\n1. Kertas daur ulang untuk bahan tulis dan cetak.\n2. Botol dan wadah plastik baru.\n3. Produk baja dan aluminium dari logam bekas.", 
+                "recycle5"),
+                new QuestionAnswer("Bagaimana cara mengedukasi masyarakat tentang pentingnya recycle?", 
+                "Cara mengedukasi masyarakat tentang pentingnya recycle antara lain:\n1. Melakukan kampanye lingkungan melalui media sosial dan komunitas.\n2. Menyelenggarakan workshop atau seminar tentang daur ulang.\n3. Mengajak masyarakat untuk berpartisipasi dalam program daur ulang lokal.", 
+                "recycle6"),
+                new QuestionAnswer("Back", "Kembali ke pertanyaan sebelumnya.", "recycle1"),
                 new QuestionAnswer("Reset QuestionBox ke awal", "Baik", "root")
         ));
+        // Cabang recycle4, bercabang ke recycle5 dan recycle6
+        questionTree.put("recycle4", Arrays.asList(
+                new QuestionAnswer("Bagaimana cara mendaur ulang sampah di rumah?", 
+                "Cara mendaur ulang sampah di rumah meliputi:\n1. Memisahkan sampah sesuai jenisnya (organik, plastik, kertas, logam).\n2. Membuat kompos dari sampah organik.\n3. Mengirim sampah anorganik ke pusat daur ulang terdekat.", 
+                "recycle5"),
+                new QuestionAnswer("Apa manfaat ekonomis dari daur ulang?", 
+                "Manfaat ekonomis dari daur ulang meliputi:\n1. Mengurangi biaya pembuangan sampah.\n2. Menciptakan peluang usaha baru di bidang daur ulang.\n3. Menghemat biaya produksi dengan menggunakan bahan daur ulang.", 
+                "recycle6"),
+                new QuestionAnswer("Back", "Kembali ke pertanyaan sebelumnya.", "recycle1"),
+                new QuestionAnswer("Reset QuestionBox ke awal", "Baik", "root")
+        ));
+        // Cabang recycle5
+        questionTree.put("recycle5", Arrays.asList(
+                new QuestionAnswer("Bagaimana peran individu dalam mendukung recycle?", 
+                "Peran individu dalam mendukung recycle sangat penting. Setiap orang dapat berkontribusi dengan:\n1. Memisahkan sampah rumah tangga sesuai jenisnya.\n2. Menggunakan produk yang terbuat dari bahan daur ulang.\n3. Mengedukasi diri sendiri dan orang lain tentang pentingnya recycle.", 
+                "recycle5"),
+                new QuestionAnswer("Apa tantangan terbesar dalam implementasi recycle?", 
+                "Tantangan terbesar dalam implementasi recycle meliputi:\n1. Kurangnya kesadaran masyarakat tentang pentingnya recycle.\n2. Infrastruktur daur ulang yang belum memadai.\n3. Biaya yang tinggi dalam proses daur ulang.", 
+                "recycle5"),
+                new QuestionAnswer("Back", "Kembali ke pertanyaan sebelumnya.", "recycle1"),
+                new QuestionAnswer("Reset QuestionBox ke awal", "Baik", "root")
+        ));
+        // Cabang recycle6
+        questionTree.put("recycle6", Arrays.asList(
+                new QuestionAnswer("Apa saja produk yang bisa dihasilkan dari daur ulang?", 
+                "Produk yang bisa dihasilkan dari daur ulang meliputi:\n1. Kertas daur ulang untuk bahan tulis dan cetak.\n2. Botol dan wadah plastik baru.\n3. Produk baja dan aluminium dari logam bekas.", 
+                "recycle6"),
+                new QuestionAnswer("Bagaimana cara mengedukasi masyarakat tentang pentingnya recycle?", 
+                "Cara mengedukasi masyarakat tentang pentingnya recycle antara lain:\n1. Melakukan kampanye lingkungan melalui media sosial dan komunitas.\n2. Menyelenggarakan workshop atau seminar tentang daur ulang.\n3. Mengajak masyarakat untuk berpartisipasi dalam program daur ulang lokal.", 
+                "recycle6"),
+                new QuestionAnswer("Back", "Kembali ke pertanyaan sebelumnya.", "recycle1"),
+                new QuestionAnswer("Reset QuestionBox ke awal", "Baik", "root")
+        ));
+    
 
 
 

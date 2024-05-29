@@ -1,5 +1,8 @@
 package project_pbo_29.Scenes;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.List;
 import java.util.Random;
@@ -99,6 +103,13 @@ public class ChatScene{
         stage.setScene(chatScene);
         ScreenSizeUtils.restoreScreenSize(stage);
         stage.show();
+        welcomeMessage();
+
+    }
+
+    private void welcomeMessage() {
+        String welcomeText = "Halo!, selamat datang di Eco-Resolver";
+        addMessage(chatArea, welcomeText, false);
     }
 
     private void addMessage(VBox chatArea, String message, boolean isUser) {
@@ -113,7 +124,12 @@ public class ChatScene{
         messageBox.getChildren().add(messageLabel);
         chatArea.getChildren().add(messageBox);
 
-        Platform.runLater(() -> chatScrollPane.setVvalue(10));
+        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), messageBox);
+        fadeIn.setFromValue(0);
+        fadeIn.setToValue(1);
+        fadeIn.play();
+
+        Platform.runLater(() -> chatScrollPane.setVvalue(1.0));
     }
 
     private void askQuestion(QuestionAnswer qa) {
@@ -152,13 +168,22 @@ public class ChatScene{
         thinkingBox.setPadding(new Insets(5, 10, 5, 10));
         thinkingBox.setAlignment(Pos.CENTER_LEFT);
 
-        Label thinkingLabel = new Label("...");
+        Label thinkingLabel = new Label("");
         thinkingLabel.setId("thinkingMessage");
 
         thinkingBox.getChildren().add(thinkingLabel);
         chatArea.getChildren().add(thinkingBox);
 
-        Platform.runLater(() -> chatScrollPane.setVvalue(10));
+        Timeline timeline = new Timeline(
+            new KeyFrame(Duration.seconds(0), event -> thinkingLabel.setText(".")),
+            new KeyFrame(Duration.seconds(0.5), event -> thinkingLabel.setText("..")),
+            new KeyFrame(Duration.seconds(1), event -> thinkingLabel.setText("...")),
+            new KeyFrame(Duration.seconds(1.5), event -> thinkingLabel.setText(""))
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+
+        Platform.runLater(() -> chatScrollPane.setVvalue(1.0));
 
         int delay = new Random().nextInt(3) + 1;
 
