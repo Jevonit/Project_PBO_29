@@ -7,7 +7,7 @@ import java.sql.*;
 
 import project_pbo_29.Scenes.ChatScene;
 
-public class DB_Utils{
+public class DB_Utils extends SQlite_Utils{
     private Stage stage;
     
     public DB_Utils(Stage stage){
@@ -22,13 +22,11 @@ public class DB_Utils{
             return;
         }
 
-        Connection connection = null;
         PreparedStatement cekInsert = null;
         PreparedStatement cekUserExists = null;
         ResultSet resultSet = null;
-
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:app/src/main/resources/database/userData.db");
+            getConnection();
             cekUserExists = connection.prepareStatement("SELECT * FROM users WHERE username = ?");
             cekUserExists.setString(1, username);
             resultSet = cekUserExists.executeQuery();
@@ -47,7 +45,7 @@ public class DB_Utils{
                 alert.show();
                 ChatScene chatScene = new ChatScene(stage,username,password);
                 ScreenSizeUtils.saveScreenSize(stage);
-                chatScene.showChatScene();
+                chatScene.showScene();
             }
 
         } catch (SQLException e) {
@@ -91,13 +89,11 @@ public class DB_Utils{
             alert.show();
             return;
         }
-
-        Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:app/src/main/resources/database/userData.db");
+            getConnection();
             preparedStatement = connection.prepareStatement("SELECT password FROM users WHERE username = ?");
             preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();
@@ -115,7 +111,7 @@ public class DB_Utils{
                         alert.show();
                         ChatScene chatScene = new ChatScene(stage,username,password);
                         ScreenSizeUtils.saveScreenSize(stage);
-                        chatScene.showChatScene();
+                        chatScene.showScene();
                     } else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setContentText("Password did not Match!");

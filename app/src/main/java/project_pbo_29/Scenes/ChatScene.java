@@ -1,6 +1,5 @@
 package project_pbo_29.Scenes;
 
-import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -21,8 +20,7 @@ import java.util.Random;
 import project_pbo_29.Data.*;
 import project_pbo_29.Utils.ScreenSizeUtils;
 
-public class ChatScene{
-    private Stage stage;
+public class ChatScene extends BaseScene {
     private String username;
     private String password;
     private VBox chatArea;
@@ -32,20 +30,20 @@ public class ChatScene{
     private boolean tungguRespon = false;
 
     public ChatScene(Stage stage, String username, String password) {
-        this.stage = stage;
+        super(stage);
         this.username = username;
         this.password = password;
         this.currentQuestion = "root";
     }
 
     public ChatScene(Stage stage) {
-        this.stage = stage;
+        super(stage);
         this.currentQuestion = "root";
     }
 
-    public void showChatScene() {
+    @Override
+    public void showScene() {
         BorderPane SceneChat = new BorderPane();
-        SceneChat.setId("SceneChat");
 
         // logo, title, settings button, and logout button
         HBox topBar = new HBox();
@@ -104,7 +102,6 @@ public class ChatScene{
         ScreenSizeUtils.restoreScreenSize(stage);
         stage.show();
         welcomeMessage();
-
     }
 
     private void welcomeMessage() {
@@ -124,11 +121,7 @@ public class ChatScene{
         messageBox.getChildren().add(messageLabel);
         chatArea.getChildren().add(messageBox);
 
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), messageBox);
-        fadeIn.setFromValue(0);
-        fadeIn.setToValue(1);
-        fadeIn.play();
-
+        applyFadeTransition(messageBox, 0, 1, 1);
         Platform.runLater(() -> chatScrollPane.setVvalue(1.0));
     }
 
@@ -182,7 +175,6 @@ public class ChatScene{
         );
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-
         Platform.runLater(() -> chatScrollPane.setVvalue(1.0));
 
         int delay = new Random().nextInt(3) + 1;
@@ -220,9 +212,8 @@ public class ChatScene{
         logoutAlert.showAndWait().ifPresent(respon -> {
             if (respon == ButtonType.OK) {
                 LoginScene loginScene = new LoginScene(stage);
-                loginScene.showLoginScene();
+                loginScene.showScene();
             }
         });
     }
-    
 }

@@ -17,18 +17,17 @@ import javafx.util.Duration;
 
 import project_pbo_29.Utils.DB_Utils;
 
-public class LoginScene {
-    private Stage stage;
-    private BorderPane SceneLogin;
+public class LoginScene extends BaseScene {
     private GridPane bagianKanan;
 
     public LoginScene(Stage stage) {
-        this.stage = stage;
+        super(stage);
     }
 
-    public void showLoginScene() {
+    @Override
+    public void showScene() {
         DB_Utils DButils = new DB_Utils(stage);
-        SceneLogin = new BorderPane();
+        BorderPane SceneLogin = new BorderPane();
 
         // Kiri
         GridPane bagianKiri = new GridPane();
@@ -99,11 +98,8 @@ public class LoginScene {
         bagianKanan.add(passwordField, 0, 2, 2, 1);
         bagianKanan.add(signInButton, 0, 3);
         bagianKanan.add(dontHaveAccountButton, 0, 4, 2, 1);
-
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), bagianKanan);
-        fadeIn.setFromValue(0);
-        fadeIn.setToValue(1);
-        fadeIn.play();
+        
+        applyFadeTransition(bagianKanan, 0, 1, 1);
     }
 
     private void switchToSignUpForm(DB_Utils DButils) {
@@ -148,10 +144,7 @@ public class LoginScene {
         bagianKanan.add(signUpButton, 0, 3);
         bagianKanan.add(haveAccountButton, 0, 4, 2, 1);
 
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.5), bagianKanan);
-        fadeIn.setFromValue(0);
-        fadeIn.setToValue(1);
-        fadeIn.play();
+        applyFadeTransition(bagianKanan, 0, 1, 1);
     }
 
     private void switchToSignInForm(DB_Utils DButils) {
@@ -163,4 +156,3 @@ public class LoginScene {
         fadeOut.play();
     }
 }
-

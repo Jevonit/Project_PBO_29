@@ -15,7 +15,7 @@ public class App extends Application{
         PrimaryStage.getIcons().add(icon);
 
         LoginScene homeScene = new LoginScene(PrimaryStage);
-        homeScene.showLoginScene(); 
+        homeScene.showScene(); 
     }
 
     public static void main(String[] args) {
