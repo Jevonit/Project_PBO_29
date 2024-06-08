@@ -9,6 +9,8 @@ import project_pbo_29.Scenes.ChatScene;
 
 public class DB_Utils extends SQlite_Utils{
     private Stage stage;
+    PreparedStatement cekUserExists = null;
+    ResultSet resultSet = null;
     
     public DB_Utils(Stage stage){
         this.stage = stage;
@@ -145,4 +147,64 @@ public class DB_Utils extends SQlite_Utils{
             }
         }
     }
+
+    public void updateUsernameInDatabase(String oldUsername, String newUsername) {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            getConnection();
+            preparedStatement = connection.prepareStatement("UPDATE users SET username = ? WHERE username = ?");
+            preparedStatement.setString(1, newUsername);
+            preparedStatement.setString(2, oldUsername);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void updatePasswordInDatabase(String username, String newPassword) {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            getConnection();
+            preparedStatement = connection.prepareStatement("UPDATE users SET password = ? WHERE username = ?");
+            preparedStatement.setString(1, newPassword);
+            preparedStatement.setString(2, username);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 }

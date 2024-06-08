@@ -9,7 +9,7 @@ public class SQlite_Utils {
 
     protected static Connection connection;
 
-    public static void getConnection() {
+    public void getConnection() {
         try {
             connection = DriverManager.getConnection(DB_URL);
         } catch (SQLException e) {

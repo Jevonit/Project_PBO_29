@@ -1,13 +1,17 @@
 package project_pbo_29.Data;
 
-import java.util.*;
+import java.util.Map;
+import java.util.List;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class QuestionAndAnswerData{
     private static final Map<String, List<QuestionAnswer>> questionTree = new HashMap<>();
 
     static {
-        questionTree.put("root", Arrays.asList( //Done = bot, reduce, reuse, energi, olahSampah
-                new QuestionAnswer("Anda siapa?", "Saya adalah aplikasi Eco-Resolver yang memiliki informasi - informasi mengenai lingkungan, anda dapat menanyakan berbagai macam pertanyaan kepada saya lewat Question button yang tersedia", "bot1"),
+        questionTree.put("root", Arrays.asList(
+                new QuestionAnswer("Anda siapa?", "Saya adalah aplikasi Eco-Resolver yang memiliki informasi - informasi mengenai lingkungan.", "bot1"),
                 new QuestionAnswer("Apa itu Reduce?", "Reduce atau reduksi adalah upaya pengelolaan sampah yang dilakukan dengan mengurangi penggunaan barang yang berpotensi menambah sampah instan. Anda bisa memulai dengan mengurangi penggunaan plastik sekali pakai, memilih produk dengan kemasan minimal, dan membeli barang dalam jumlah besar untuk mengurangi kemasan.", "reduce1"),
                 new QuestionAnswer("Apa itu Reuse?", "Reuse berarti menggunakan kembali sampah yang masih bisa dipakai. Hal ini bisa menjadi solusi pengelolaan sampah mandiri sehingga tidak harus selalu dibuang dan berakhir di TPA.", "reuse1"),
                 new QuestionAnswer("Apa itu Recycle?", "Recycle merupakan kegiatan mendaur ulang sampah-sampah atau bahan tidak terpakai menjadi bahan lain dengan melalui proses pengolahan.", "recycle1"),
@@ -38,6 +42,7 @@ public class QuestionAndAnswerData{
 
         questionTree.put("bot1", Arrays.asList(
                 new QuestionAnswer("Saat ini anda memiliki berapa Data?", "Saat ini saya memiliki lebih dari 100 kemungkinan chat yang berbeda, anda dapat mencobanya , Semoga anda dapat mendapatkan informasi yang berguna!", "root"),
+                new QuestionAnswer("Bagaimana cara saya bertanya?", "Anda dapat menanyakan berbagai macam pertanyaan kepada saya lewat Question button yang tersedia.", "root"),
                 new QuestionAnswer("Reset QuestionBox ke awal", "Baik", "root")
         ));
 
@@ -56,14 +61,14 @@ public class QuestionAndAnswerData{
                 new QuestionAnswer("Reset QuestionBox ke awal", "Baik", "root")
         ));
         questionTree.put("pertanyaanUtama_21_1", Arrays.asList(
-                new QuestionAnswer("Di rumah", "Anda bisa membuat kompos menggunakan wadah kompos atau komposter. Caranya adalah dengan mengumpulkan sampah dapur seperti sisa sayuran, buah-buahan, dan daun-daunan. Masukkan bahan-bahan ini ke dalam komposter, tambahkan tanah atau serbuk gergaji, dan aduk secara berkala. Pastikan untuk menjaga kelembapan dan aerasi yang baik. Dalam beberapa minggu, Anda akan mendapatkan kompos yang bisa digunakan sebagai pupuk organik untuk tanaman di rumah Anda.", "root"),
-                new QuestionAnswer("Skala besar", "Untuk skala besar, Anda memerlukan lahan yang cukup luas dan peralatan seperti mesin pencacah, alat pengaduk, dan sistem aerasi. Prosesnya melibatkan pengumpulan sampah organik dalam jumlah besar, mencacahnya menjadi potongan kecil, dan menumpuknya dalam kompos. Anda perlu memantau suhu, kelembapan, dan aerasi secara teratur. Setelah beberapa bulan, Anda akan memiliki kompos dalam jumlah besar yang dapat dijual sebagai pupuk organik.", "root"),
+                new QuestionAnswer("Di rumah", "Anda bisa membuat kompos dengan mudah di rumah menggunakan wadah kompos atau komposter. Mulailah dengan mengumpulkan sampah dapur seperti sisa sayuran, buah-buahan, daun-daunan, dan bahan organik lainnya. Masukkan bahan-bahan tersebut ke dalam komposter, tambahkan tanah atau serbuk gergaji untuk membantu proses dekomposisi, dan aduk secara berkala untuk memastikan sirkulasi udara yang baik. Pastikan untuk menjaga kelembapan agar bakteri pengurai bisa bekerja dengan efektif. Dalam beberapa minggu, sampah tersebut akan berubah menjadi kompos yang kaya nutrisi dan bisa digunakan sebagai pupuk organik untuk tanaman di rumah Anda.", "pertanyaanUtama_21_1"),
+                new QuestionAnswer("Skala besar", "Jika Anda berencana membuat kompos dalam skala besar, Anda memerlukan lahan yang cukup luas dan peralatan seperti mesin pencacah, alat pengaduk, dan sistem aerasi. Prosesnya melibatkan pengumpulan sampah organik dalam jumlah besar, mencacahnya menjadi potongan kecil, dan menumpuknya dalam bentuk kompos. Anda perlu memantau suhu, kelembapan, dan aerasi secara teratur untuk memastikan proses dekomposisi berjalan dengan baik. Setelah beberapa bulan, Anda akan mendapatkan kompos dalam jumlah besar yang dapat dijual sebagai pupuk organik, memberikan manfaat ekonomi sekaligus mengurangi limbah.", "pertanyaanUtama_21_1"),
                 new QuestionAnswer("Back", "Kembali ke pertanyaan sebelumnya.", "pertanyaanUtama_21"),
                 new QuestionAnswer("Reset QuestionBox ke awal", "Baik", "root")
         ));
         questionTree.put("pertanyaanUtama_21_2", Arrays.asList(
-                new QuestionAnswer("Rumah tangga", "Anda bisa membuat instalasi biogas kecil di rumah. Caranya adalah dengan menggunakan digester, yaitu wadah tertutup yang akan menampung sampah organik seperti sisa makanan dan kotoran hewan. Dalam digester, sampah organik akan terurai oleh bakteri anaerobik menghasilkan gas metana yang bisa digunakan untuk memasak atau menghasilkan listrik. Anda bisa mencari panduan lebih lanjut tentang cara membuat digester sederhana.", "root"),
-                new QuestionAnswer("Skala komersial", "Untuk skala komersial, Anda memerlukan instalasi biogas yang lebih besar dan investasi awal yang cukup besar. Prosesnya melibatkan pengumpulan sampah organik dalam jumlah besar, pengolahan dalam digester besar, dan pemanenan gas metana yang dihasilkan. Gas metana ini bisa diubah menjadi energi listrik atau bahan bakar. Anda mungkin perlu bekerja sama dengan ahli biogas dan mencari pendanaan untuk proyek ini.", "root"),
+                new QuestionAnswer("Rumah tangga", "Anda bisa membuat instalasi biogas kecil di rumah dengan menggunakan digester, yaitu wadah tertutup yang akan menampung sampah organik seperti sisa makanan dan kotoran hewan. Dalam digester, sampah organik akan terurai oleh bakteri anaerobik menghasilkan gas metana yang bisa digunakan untuk memasak atau menghasilkan listrik. Anda bisa mencari panduan lebih lanjut tentang cara membuat digester sederhana, yang biasanya melibatkan bahan-bahan dan alat yang mudah ditemukan serta perawatan yang tidak terlalu rumit.", "root"),
+                new QuestionAnswer("Skala komersial", "Untuk skala komersial, Anda memerlukan instalasi biogas yang lebih besar dan investasi awal yang cukup besar. Prosesnya melibatkan pengumpulan sampah organik dalam jumlah besar, pengolahan dalam digester besar, dan pemanenan gas metana yang dihasilkan. Gas metana ini bisa diubah menjadi energi listrik atau bahan bakar untuk keperluan industri. Anda mungkin perlu bekerja sama dengan ahli biogas dan mencari pendanaan untuk proyek ini, serta mempertimbangkan aspek perizinan dan operasional yang lebih kompleks dibandingkan dengan skala rumah tangga.", "root"),
                 new QuestionAnswer("Back", "Kembali ke pertanyaan sebelumnya.", "pertanyaanUtama_21"),
                 new QuestionAnswer("Reset QuestionBox ke awal", "Baik", "root")
         ));
@@ -77,8 +82,8 @@ public class QuestionAndAnswerData{
                 new QuestionAnswer("Reset QuestionBox ke awal", "Baik", "root")
         ));
         questionTree.put("pertanyaanUtama_22_1", Arrays.asList(
-                new QuestionAnswer("Daur ulang", "Anda bisa mengumpulkan sampah plastik dan mengirimkannya ke pusat daur ulang plastik. Proses daur ulang melibatkan pemisahan, pencucian, dan pencacahan plastik menjadi pelet yang bisa digunakan untuk membuat produk plastik baru. Anda juga bisa mencari informasi tentang cara mendaur ulang plastik di rumah menggunakan peralatan sederhana.", "pertanyaanUtama_22_1"),
-                new QuestionAnswer("Kerajinan", "Anda bisa membuat berbagai produk kerajinan dari sampah plastik, seperti tas, dompet, atau perhiasan. Caranya adalah dengan mengumpulkan sampah plastik bersih, memotongnya menjadi bentuk yang diinginkan, dan menggabungkannya menggunakan lem atau teknik anyaman. Banyak ide kreatif yang bisa ditemukan di internet untuk inspirasi.", "pertanyaanUtama_22_1"),
+                new QuestionAnswer("Daur ulang", "Anda bisa mengumpulkan sampah plastik dan mengirimkannya ke pusat daur ulang plastik. Proses daur ulang melibatkan pemisahan, pencucian, dan pencacahan plastik menjadi pelet yang bisa digunakan untuk membuat produk plastik baru. Anda juga bisa mencari informasi tentang cara mendaur ulang plastik di rumah menggunakan peralatan sederhana, yang bisa menjadi proyek yang menyenangkan dan mendidik untuk seluruh keluarga.", "pertanyaanUtama_22_1"),
+                new QuestionAnswer("Kerajinan", "Anda bisa membuat berbagai produk kerajinan dari sampah plastik, seperti tas, dompet, atau perhiasan. Caranya adalah dengan mengumpulkan sampah plastik bersih, memotongnya menjadi bentuk yang diinginkan, dan menggabungkannya menggunakan lem atau teknik anyaman. Banyak ide kreatif yang bisa ditemukan di internet untuk inspirasi, dan Anda bisa menjual hasil kerajinan ini sebagai produk unik dan ramah lingkungan.", "pertanyaanUtama_22_1"),
                 new QuestionAnswer("Back", "Kembali ke pertanyaan sebelumnya.", "pertanyaanUtama_22"),
                 new QuestionAnswer("Reset QuestionBox ke awal", "Baik", "root")
         ));

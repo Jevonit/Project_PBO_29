@@ -1,33 +1,39 @@
 package project_pbo_29.Scenes;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame;
 import javafx.util.Duration;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
-import project_pbo_29.Data.*;
+import project_pbo_29.Data.QuestionAnswer;
+import project_pbo_29.Data.QuestionAndAnswerData;
 import project_pbo_29.Utils.ScreenSizeUtils;
+import project_pbo_29.Utils.DB_Utils;;
 
 public class ChatScene extends BaseScene {
-    private String username;
+    public String username;
     private String password;
     private VBox chatArea;
     private VBox inputArea;
     private ScrollPane chatScrollPane;
     private String currentQuestion;
     private boolean tungguRespon = false;
+    private Button scrollToBottomButton;
+
+    private Label usernameLabel;
+    private Label passwordLabel;
 
     public ChatScene(Stage stage, String username, String password) {
         super(stage);
@@ -64,7 +70,7 @@ public class ChatScene extends BaseScene {
         settingsIconView.setFitWidth(50);
         Button settingsButton = new Button("", settingsIconView);
         settingsButton.setId("settingsButton");
-        settingsButton.setOnAction(event -> accountView());
+        settingsButton.setOnAction(event -> showProfile());
 
         Button logoutButton = new Button("Logout");
         logoutButton.setId("logoutButton");
@@ -96,13 +102,39 @@ public class ChatScene extends BaseScene {
         SceneChat.setBottom(inputScrollPane);
         updateQuestions();
 
+        //fitur tambahan, button yang ketika ditekan akan langsung mengscroll ke akhir chat
+        scrollToBottomButton = new Button("⬇");
+        scrollToBottomButton.setId("scrollToBottomButton");
+        scrollToBottomButton.setOnAction(event -> chatScrollPane.setVvalue(1.0));
+        
+        StackPane chatStackPane = new StackPane();
+        chatStackPane.getChildren().addAll(chatScrollPane, scrollToBottomButton);
+        StackPane.setAlignment(scrollToBottomButton, Pos.BOTTOM_RIGHT);
+        StackPane.setMargin(scrollToBottomButton, new Insets(10));
+        SceneChat.setCenter(chatStackPane);
+
+        HBox inputBox = new HBox();
+        inputBox.getChildren().addAll(inputScrollPane);
+        HBox.setHgrow(inputScrollPane, Priority.ALWAYS);
+        SceneChat.setBottom(inputBox);
+
         Scene chatScene = new Scene(SceneChat, 1000, 600);
         chatScene.getStylesheets().add(getClass().getResource("/style/styleChatScene.css").toExternalForm());
         stage.setScene(chatScene);
         ScreenSizeUtils.restoreScreenSize(stage);
         stage.show();
         welcomeMessage();
+
+        // fitur tambahan, tombol untuk scroll keakhir chat akan hilang ketika kita sedang berada di akhir chat/sesuai yang diatur
+        chatScrollPane.vvalueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.doubleValue() < 1.0) {
+                scrollToBottomButton.setVisible(true);
+            } else {
+                scrollToBottomButton.setVisible(false);
+            }
+        });
     }
+
 
     private void welcomeMessage() {
         String welcomeText = "Halo!, selamat datang di Eco-Resolver";
@@ -149,6 +181,11 @@ public class ChatScene extends BaseScene {
             buttonContainer.setAlignment(Pos.CENTER_LEFT);
             inputArea.getChildren().add(buttonContainer);
 
+            //tambahan code untuk memanjangkan jangkauan tekan Questionbox
+            HBox.setHgrow(questionButton, Priority.ALWAYS);
+            questionButton.setMaxWidth(Double.MAX_VALUE);
+            questionButton.setAlignment(Pos.BASELINE_LEFT);
+
             if (i < currentQuestions.size() - 1) {
                 Separator separator = new Separator();
                 inputArea.getChildren().add(separator);
@@ -194,17 +231,113 @@ public class ChatScene extends BaseScene {
         }).start();
     }
 
-    private void accountView() {
-        Alert settingsAlert = new Alert(Alert.AlertType.INFORMATION);
-        settingsAlert.setTitle("Settings");
-        settingsAlert.setHeaderText("Profile Information");
-        settingsAlert.setContentText("Username: " + username + "\nPassword: " + password);
-        settingsAlert.getDialogPane().getStylesheets().add(getClass().getResource("/style/styleAlert.css").toExternalForm());
-        settingsAlert.show();
+    // penambahan fitur, sekarang bisa menghide password, dan kita bisa mengubah username dan password
+    private void showProfile() {
+        Dialog<Void> profileDialog = new Dialog<>();
+        profileDialog.setTitle("Profile Information");
+        profileDialog.getDialogPane().getStylesheets().add(getClass().getResource("/style/styleChatScene.css").toExternalForm());
+        profileDialog.getDialogPane().getStyleClass().add("profile-dialog");
+    
+        profileDialog.getDialogPane().setMinWidth(400);
+        profileDialog.getDialogPane().setMinHeight(300);
+    
+        GridPane profileLayout = new GridPane();
+        profileLayout.setAlignment(Pos.CENTER);
+        profileLayout.setPadding(new Insets(20));
+        profileLayout.setHgap(10);
+        profileLayout.setVgap(10);
+    
+        usernameLabel = new Label("Username: " + username);
+        usernameLabel.getStyleClass().add("label");
+    
+        passwordLabel = new Label("Password: " + "*".repeat(password.length()));
+        passwordLabel.getStyleClass().add("label");
+    
+        Button showHidePasswordButton = new Button("Show");
+        showHidePasswordButton.setOnAction(event -> {
+            if (showHidePasswordButton.getText().equals("Show")) {
+                passwordLabel.setText("Password: " + password);
+                showHidePasswordButton.setText("Hide");
+            } else {
+                passwordLabel.setText("Password: " + "*".repeat(password.length()));
+                showHidePasswordButton.setText("Show");
+            }
+        });
+    
+        Button changeUsernameButton = new Button("Change Username");
+        changeUsernameButton.setOnAction(event -> changeUsername());
+    
+        Button changePasswordButton = new Button("Change Password");
+        changePasswordButton.setOnAction(event -> changePassword());
+    
+        profileLayout.add(usernameLabel, 0, 0);
+        profileLayout.add(changeUsernameButton, 1, 0);
+        profileLayout.add(passwordLabel, 0, 1);
+        profileLayout.add(changePasswordButton, 1, 1);
+        profileLayout.add(showHidePasswordButton, 1, 2);
+    
+        profileDialog.getDialogPane().setContent(profileLayout);
+        profileDialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+    
+        profileDialog.showAndWait();
     }
-
-    private void Logout(){
-        Alert logoutAlert = new Alert(AlertType.CONFIRMATION);
+    
+    private void changeUsername() {
+        DB_Utils DButils = new DB_Utils(stage);
+        TextInputDialog dialog = new TextInputDialog(username);
+        dialog.setTitle("Change Username");
+        dialog.setHeaderText("Enter new username:");
+        Optional<String> result = dialog.showAndWait();
+        result.ifPresent(newUsername -> {
+            if (newUsername == null || newUsername.trim().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Username and Password cannot be empty!");
+                alert.show();
+            } else {
+                DButils.updateUsernameInDatabase(username, newUsername);
+                username = newUsername;
+                usernameLabel.setText("Username: " + newUsername);
+            }
+        });
+    }
+    
+    private void changePassword() {
+        DB_Utils DButils = new DB_Utils(stage);
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle("Change Password");
+        dialog.setHeaderText("Enter new password:");
+    
+        ButtonType okButtonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(okButtonType, ButtonType.CANCEL);
+    
+        PasswordField passwordField = new PasswordField();
+        passwordField.setPromptText("New Password");
+    
+        dialog.getDialogPane().setContent(passwordField);
+    
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == okButtonType) {
+                return passwordField.getText();
+            }
+            return null;
+        });
+    
+        Optional<String> result = dialog.showAndWait();
+        result.ifPresent(newPassword -> {
+            if (newPassword == null || newPassword.trim().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Username and Password cannot be empty!");
+                alert.show();
+            } else {
+                DButils.updatePasswordInDatabase(username, newPassword);
+                password = newPassword;
+                passwordLabel.setText("Password: " + "*".repeat(newPassword.length()));
+            }
+        });
+    }
+    
+    private void Logout() {
+        Alert logoutAlert = new Alert(Alert.AlertType.CONFIRMATION);
         logoutAlert.setTitle("Logout Confirmation");
         logoutAlert.setHeaderText("Are you sure you want to logout?");
         logoutAlert.setContentText("Press OK to logout or Cancel to stay.");
